@@ -5,6 +5,18 @@ Module Menu
     Enum MenuName
         _MainMenu
         _Programming
+        _DataStructures
+        _Algorithms
+        _Computation
+        _DataRepresentation
+        _ComputerSystems
+        _OrganizationAndArchitecture
+        _ConsequencesOfUse
+        _CommunicationAndNetworking
+        _Databases
+        _BigData
+        _FunctionalProgramming
+        _ProblemSolving
     End Enum
 
     'Calls main menu in Menu
@@ -12,13 +24,14 @@ Module Menu
         Menu(MenuName._MainMenu)
     End Sub
 
-    Sub Menu()
+    Sub Menu(SelectedMenu as MenuName)
         'Declare 2D array of all available menus
-        Dim Menus(,) as String = {{"Programming"},{" "}}
+        Dim Menus(,) as String = {{"Programming", "Data Structures", "Algorithms", "Computation", "Data Representation", "Computer Systems", "Organization & Architecture", "Consequence of Use", "Communication & Networking", "Databases", "Big Data", "Functional Programming", "Problem Solving"},
+                                  {"Basics", "Selection", "Iteration", "Arrays", "Subroutines", "File & Exception Handling", "Structured Programming", " ", " ", " ", " ", " ", " "}}
 
         'Declares user's selected option as an integer
         Dim SelectedOption as Integer = 0
-        
+
         'Ensures user can go back to previous menus
         Dim BackspacePressed as Boolean = False
 
@@ -31,14 +44,71 @@ Module Menu
             'Select which menu to display
             Select Case SelectedMenu
                 Case MenuName._MainMenu
+                    'If BackspacePressed is true it's set to false
                     If BackspacePressed Then
-                        BackspacePressed = True
+                        BackspacePressed = False
                     End If
 
+                    'Calls menu interface with MainMenu information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 13)
 
+                    'Decides which program to call based on selected option
+                    Select Case SelectedOption
+                        Case 0
+                            SelectedMenu = MenuName._Programming
+                        Case 1
+                            SelectedMenu = MenuName._DataStructures
+                        Case 2
+                            SelectedMenu = MenuName._Algorithms
+                        Case 3
+                            SelectedMenu = MenuName._Computation
+                        Case 4
+                            SelectedMenu = MenuName._DataRepresentation
+                        Case 5
+                            SelectedMenu = MenuName._ComputerSystems
+                        Case 6
+                            SelectedMenu = MenuName._OrganizationAndArchitecture
+                        Case 7
+                            SelectedMenu = MenuName._ConsequencesOfUse
+                        Case 8
+                            SelectedMenu = MenuName._CommunicationAndNetworking
+                        Case 9
+                            SelectedMenu = MenuName._Databases
+                        Case 10
+                            SelectedMenu = MenuName._BigData
+                        Case 11
+                            SelectedMenu = MenuName._FunctionalProgramming
+                        Case 12
+                            SelectedMenu = MenuName._ProblemSolving
+                    End Select
+                
+                Case MenuName._Programming
+                    'Calls menu interface with Programming information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 7)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                Basics()
+                            Case 1
+                                Selection()
+                            Case 2
+                                Iteration()
+                            Case 3
+                                Arrays()
+                            Case 4
+                                Subroutines()
+                            Case 5
+                                FileAndExceptionHandling()
+                            Case 6
+                                StructuredProgramming()
+                        End Select
+                    End If
             End Select
         Loop
-    End Sub()
+    End Sub
 
     Sub MenuInterface(ByRef SelectedMenu as MenuName, ByRef SelectedOption as Integer, ByRef BackspacePressed as Boolean, Menus(,) as String, MenuSize as Integer)
         'Stores information from Console.ReadKey()
@@ -52,13 +122,33 @@ Module Menu
             'Displays selected menu information
             Select Case SelectedMenu
                 Case MenuName._MainMenu
-                    Console.WriteLine("Main Menu:               Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._ModerationTasks
-                    Console.WriteLine("Moderation Tasks:        Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._ProgrammingTasks
-                    Console.WriteLine("Programming Tasks:       Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._ExtensionTasks
-                    Console.WriteLine("Extension Tasks:         Navigate using arrows. Enter to select. Backspace to return.")
+                    Console.WriteLine("Main Menu:                           Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._Programming
+                    Console.WriteLine("Programming:                         Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._DataStructures
+                    Console.WriteLine("Data Structures:                     Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._Algorithms
+                    Console.WriteLine("Algorithms:                          Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._Computation
+                    Console.WriteLine("Computation:                         Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._DataRepresentation
+                    Console.WriteLine("Data Representation:                 Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._ComputerSystems
+                    Console.WriteLine("Computer Systems:                    Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._OrganizationAndArchitecture
+                    Console.WriteLine("Organization & Architecture:         Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._ConsequencesOfUse
+                    Console.WriteLine("Consequences Of Use:                 Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._CommunicationAndNetworking
+                    Console.WriteLine("Communication & Networking:          Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._Databases
+                    Console.WriteLine("Databases:                           Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._BigData
+                    Console.WriteLine("Big Data:                            Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._FunctionalProgramming
+                    Console.WriteLine("Functional Programming:              Navigate using arrows. Enter to select. Backspace to return.")
+                Case MenuName._ProblemSolving
+                    Console.WriteLine("Problem Solving:                     Navigate using arrows. Enter to select. Backspace to return.")
             End Select
 
                        'Displays selected menu with selected option highlighted
@@ -79,7 +169,7 @@ Module Menu
                 End If
             Next
 
-            'Changes user's selected option in menu based on keypress
+            'Changes user's selected option in menu based on key press
             MenuSelect = Console.ReadKey()
             Select Case MenuSelect.Key
                 Case ConsoleKey.Backspace
@@ -115,9 +205,38 @@ Module Menu
             End Select
             Console.Clear()
         Loop Until MenuSelect.Key = ConsoleKey.Enter
-        
+
         'Makes cursor visible
         Console.CursorVisible = True
-        Loop
-    End Sub()
+    End Sub
+End Module
+
+Module Programming
+    Sub Basics()
+
+    End Sub
+
+    Sub Selection()
+
+    End Sub
+
+    Sub Iteration()
+
+    End Sub
+
+    Sub Arrays()
+
+    End Sub
+
+    Sub Subroutines()
+
+    End Sub
+
+    Sub FileAndExceptionHandling()
+
+    End Sub
+
+    Sub StructuredProgramming()
+
+    End Sub
 End Module
