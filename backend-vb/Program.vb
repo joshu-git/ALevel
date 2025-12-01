@@ -472,6 +472,8 @@ Module DataRepresentation
     End Sub
 
     Sub CompressionAndEncryption()
+
+    End Sub
 End Module
 
 Module ComputerSystems
