@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "/home/joshu/Education/ALevel/backend-vb/school-vb.vbproj": {}
+    "/home/joshu/Education/ALevel/backend-vb/ALevel.vbproj": {}
   },
   "projects": {
-    "/home/joshu/Education/ALevel/backend-vb/school-vb.vbproj": {
+    "/home/joshu/Education/ALevel/backend-vb/ALevel.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/joshu/Education/ALevel/backend-vb/school-vb.vbproj",
-        "projectName": "school-vb",
-        "projectPath": "/home/joshu/Education/ALevel/backend-vb/school-vb.vbproj",
+        "projectUniqueName": "/home/joshu/Education/ALevel/backend-vb/ALevel.vbproj",
+        "projectName": "ALevel",
+        "projectPath": "/home/joshu/Education/ALevel/backend-vb/ALevel.vbproj",
         "packagesPath": "/home/joshu/.nuget/packages/",
         "outputPath": "/home/joshu/Education/ALevel/backend-vb/obj/",
         "projectStyle": "PackageReference",

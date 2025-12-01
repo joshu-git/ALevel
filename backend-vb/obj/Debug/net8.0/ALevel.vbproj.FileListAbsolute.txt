@@ -1,0 +1,15 @@
+/home/joshu/Education/ALevel/backend-vb/bin/Debug/net8.0/ALevel
+/home/joshu/Education/ALevel/backend-vb/bin/Debug/net8.0/ALevel.deps.json
+/home/joshu/Education/ALevel/backend-vb/bin/Debug/net8.0/ALevel.runtimeconfig.json
+/home/joshu/Education/ALevel/backend-vb/bin/Debug/net8.0/ALevel.dll
+/home/joshu/Education/ALevel/backend-vb/bin/Debug/net8.0/ALevel.pdb
+/home/joshu/Education/ALevel/backend-vb/obj/Debug/net8.0/ALevel.GeneratedMSBuildEditorConfig.editorconfig
+/home/joshu/Education/ALevel/backend-vb/obj/Debug/net8.0/ALevel.AssemblyInfoInputs.cache
+/home/joshu/Education/ALevel/backend-vb/obj/Debug/net8.0/ALevel.AssemblyInfo.vb
+/home/joshu/Education/ALevel/backend-vb/obj/Debug/net8.0/ALevel.vbproj.CoreCompileInputs.cache
+/home/joshu/Education/ALevel/backend-vb/obj/Debug/net8.0/ALevel.sourcelink.json
+/home/joshu/Education/ALevel/backend-vb/obj/Debug/net8.0/ALevel.dll
+/home/joshu/Education/ALevel/backend-vb/obj/Debug/net8.0/refint/ALevel.dll
+/home/joshu/Education/ALevel/backend-vb/obj/Debug/net8.0/ALevel.pdb
+/home/joshu/Education/ALevel/backend-vb/obj/Debug/net8.0/ALevel.genruntimeconfig.cache
+/home/joshu/Education/ALevel/backend-vb/obj/Debug/net8.0/ref/ALevel.dll

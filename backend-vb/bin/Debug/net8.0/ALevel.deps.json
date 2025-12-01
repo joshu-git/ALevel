@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "school-vb/1.0.0": {
+      "ALevel/1.0.0": {
         "runtime": {
-          "school-vb.dll": {}
+          "ALevel.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "school-vb/1.0.0": {
+    "ALevel/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
