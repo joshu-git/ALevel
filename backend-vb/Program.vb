@@ -27,7 +27,19 @@ Module Menu
     Sub Menu(SelectedMenu as MenuName)
         'Declare 2D array of all available menus
         Dim Menus(,) as String = {{"Programming", "Data Structures", "Algorithms", "Computation", "Data Representation", "Computer Systems", "Organization & Architecture", "Consequence of Use", "Communication & Networking", "Databases", "Big Data", "Functional Programming", "Problem Solving"},
-                                  {"Basics", "Selection", "Iteration", "Arrays", "Subroutines", "File & Exception Handling", "Structured Programming", " ", " ", " ", " ", " ", " "}}
+                                  {"Basics", "Selection", "Iteration", "Arrays", "Subroutines", "File & Exception Handling", "Structured Programming", "Contacts List", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "}}
 
         'Declares user's selected option as an integer
         Dim SelectedOption as Integer = 0
@@ -84,7 +96,7 @@ Module Menu
                 
                 Case MenuName._Programming
                     'Calls menu interface with Programming information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 7)
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 8)
 
                     'Skips programs if backspace was pressed
                     If Not BackspacePressed Then
@@ -151,7 +163,7 @@ Module Menu
                     Console.WriteLine("Problem Solving:                     Navigate using arrows. Enter to select. Backspace to return.")
             End Select
 
-                       'Displays selected menu with selected option highlighted
+            'Displays selected menu with selected option highlighted
             For x = 0 To MenuSize - 1
                 'Adds a line break every four options
                 If x Mod 3 = 0 Then
@@ -239,4 +251,72 @@ Module Programming
     Sub StructuredProgramming()
 
     End Sub
+
+    Enum ContactsListMenuName
+        _MainMenu
+    End Enum
+
+    Sub ContactsList()
+
+    End Sub
+End Module
+
+Module DataStructures
+
+End Module
+
+Module Algorithms
+
+End Module
+
+Module Computation
+
+End Module
+
+Module DataRepresentation
+    Sub NumberSystems()
+
+    End Sub
+
+    Sub BinaryArithmetic()
+
+    End Sub
+
+    Sub BitsAndBytes()
+
+    End Sub
+
+    Sub CharacterCoding()
+
+    End Sub
+
+    Sub SoundRepresentation()
+
+    End Sub
+
+    Sub ImageRepresentation()
+
+    End Sub
+
+    Sub CompressionAndEncryption()
+End Module
+
+Module ComputerSystems
+
+End Module
+
+Module OrganizationAndArchitecture
+
+End Module
+
+Module Databases
+
+End Module
+
+Module BigData
+
+End Module
+
+Module FunctionalProgramming
+
 End Module
