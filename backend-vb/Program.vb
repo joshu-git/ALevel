@@ -31,8 +31,8 @@ Module Menu
                                   {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
                                   {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
                                   {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                  {"Number Systems", "Binary Arithmetic", "Bits & Bytes", "Character Coding", "Sound Representation", "Image Representation", "Compression & Encryption", " ", " ", " ", " ", " ", " "},
+                                  {"Hardware & Software", "Role Of The OS", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
                                   {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
                                   {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
                                   {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
@@ -116,8 +116,181 @@ Module Menu
                                 FileAndExceptionHandling()
                             Case 6
                                 StructuredProgramming()
+                            Case 7
+                                ContactsList()
                         End Select
                     End If
+                
+                Case MenuName._DataStructures
+                    'Calls menu interface with DataStructures information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call subroutine here
+                        End Select
+                    End If
+                
+                Case MenuName._Algorithms
+                    'Calls menu interface with Algorithms information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call subroutine here
+                        End Select
+                    End If
+                
+                Case MenuName._Computation
+                    'Calls menu interface with Computation information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call subroutine here
+                        End Select
+                    End If
+                
+                Case MenuName._DataRepresentation
+                    'Calls menu interface with Programming information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 7)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                NumberSystems()
+                            Case 1
+                                BinaryArithmetic()
+                            Case 2
+                                BitsAndBytes()
+                            Case 3
+                                CharacterCoding()
+                            Case 4
+                                SoundRepresentation()
+                            Case 5
+                                ImageRepresentation()
+                            Case 6
+                                CompressionAndEncryption()
+                        End Select
+                    End If
+                
+                Case MenuName._ComputerSystems
+                    'Calls menu interface with ComputerSystems information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 2)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                HardwareAndSoftware()
+                            Case 1
+                                RoleOfTheOS()
+                        End Select
+                    End If
+                
+                Case MenuName._OrganizationAndArchitecture
+                    'Calls menu interface with OrganizationAndArchitecture information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call subroutine here
+                        End Select
+                    End If
+                
+                Case MenuName._ConsequencesOfUse
+                    'Calls menu interface with ConsequencesOfUse information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call subroutine here
+                        End Select
+                    End If
+                
+                Case MenuName._CommunicationAndNetworking
+                    'Calls menu interface with CommunicationAndNetworking information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call subroutine here
+                        End Select
+                    End If
+                
+                Case MenuName._Databases
+                    'Calls menu interface with Databases information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call subroutine here
+                        End Select
+                    End If
+                
+                Case MenuName._BigData
+                    'Calls menu interface with BigData information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call subroutine here
+                        End Select
+                    End If
+                
+                Case MenuName._FunctionalProgramming
+                    'Calls menu interface with FunctionalProgramming information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call subroutine here
+                        End Select
+                    End If
+                
+                Case MenuName._ProblemSolving
+                    'Calls menu interface with ProblemSolving information
+                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call subroutine here
+                        End Select
+                    End If
+                
             End Select
         Loop
     End Sub
@@ -302,7 +475,13 @@ Module DataRepresentation
 End Module
 
 Module ComputerSystems
+    Sub HardwareAndSoftware()
 
+    End Sub
+
+    Sub RoleOfTheOS()
+
+    End Sub
 End Module
 
 Module OrganizationAndArchitecture
