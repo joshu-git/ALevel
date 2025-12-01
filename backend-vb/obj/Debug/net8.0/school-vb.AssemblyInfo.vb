@@ -15,7 +15,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("school-vb"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c0123205b154964d57f36a2c9a86256901fdd0d"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4541accbe10954f1621a59ee4208403ca60bbd9"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("school-vb"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("school-vb"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")> 

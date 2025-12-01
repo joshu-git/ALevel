@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/joshu/School/school-vb/school-vb.vbproj",
+      "projectUniqueName": "/home/joshu/Education/ALevel/backend-vb/school-vb.vbproj",
       "projectName": "school-vb",
-      "projectPath": "/home/joshu/School/school-vb/school-vb.vbproj",
+      "projectPath": "/home/joshu/Education/ALevel/backend-vb/school-vb.vbproj",
       "packagesPath": "/home/joshu/.nuget/packages/",
-      "outputPath": "/home/joshu/School/school-vb/obj/",
+      "outputPath": "/home/joshu/Education/ALevel/backend-vb/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/joshu/.nuget/NuGet/NuGet.Config"
