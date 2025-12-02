@@ -501,3 +501,7 @@ End Module
 Module FunctionalProgramming
 
 End Module
+
+Module ProblemSolving
+
+End Module
