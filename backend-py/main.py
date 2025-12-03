@@ -21,3 +21,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+#Health check for backend startup
+@app.get("/")
+def root():
+    return {"message": "Backend is running!"}
