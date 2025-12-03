@@ -402,39 +402,10 @@ Module Menu
         'Loops menu interface until enter is pressed
         Do
             'Displays selected menu information
-            Select Case SelectedMenu
-                Case MenuName._MainMenu
-                    Console.WriteLine("Main Menu:                           Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._Programming
-                    Console.WriteLine("~Programming:                         Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._DataStructures
-                    Console.WriteLine("~~Data Structures:                     Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._Algorithms
-                    Console.WriteLine("Algorithms:                          Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._Computation
-                    Console.WriteLine("Computation:                         Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._DataRepresentation
-                    Console.WriteLine("Data Representation:                 Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._ComputerSystems
-                    Console.WriteLine("Computer Systems:                    Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._OrganizationAndArchitecture
-                    Console.WriteLine("Organization & Architecture:         Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._ConsequencesOfUse
-                    Console.WriteLine("Consequences Of Use:                 Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._CommunicationAndNetworking
-                    Console.WriteLine("Communication & Networking:          Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._Databases
-                    Console.WriteLine("Databases:                           Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._BigData
-                    Console.WriteLine("Big Data:                            Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._FunctionalProgramming
-                    Console.WriteLine("Functional Programming:              Navigate using arrows. Enter to select. Backspace to return.")
-                Case MenuName._ProblemSolving
-                    Console.WriteLine("Problem Solving:                     Navigate using arrows. Enter to select. Backspace to return.")
-            End Select
+            Console.WriteLine(Menus(SelectedMenu, 0).PadRight(60, " ") & "Navigate using arrows. Enter to select. Backspace to return.")
 
             'Displays selected menu with selected option highlighted
-            For x = 0 To MenuSize - 1
+            For x = 1 To MenuSize - 1
                 'Adds a line break every four options
                 If x Mod 3 = 0 Then
                     Console.WriteLine()
