@@ -1,74 +1,112 @@
 Imports System
 
 Module Menu
-    'Declares useable menu names as enum
-    Enum MenuName
-        _MainMenu
-        __ComputerScience
-        ___Programming
-        ____Basics
-        ____Selection
-        ____Iteration
-        ____Arrays
-        ____Subroutines
-        ____FileAndExceptionHandling
-        ____StructuredProgramming
-        ____ContactsList
-        ___DataStructures
-        ___Algorithms
-        ___Computation
-        ___DataRepresentation
-        ____NumberSystems
-        ____BinaryArithmetic
-        ____BitsAndBytes
-        ____CharacterCoding
-        ____SoundRepresentation
-        ____ImageRepresentation
-        ____CompressionAndEncryption
-        ___ComputerSystems
-        ____HardwareAndSoftware
-        ____RoleOfTheOS
-        ___OrganizationAndArchitecture
-        ___ConsequencesOfUse
-        ___CommunicationAndNetworking
-        ___Databases
-        ___BigData
-        ___FunctionalProgramming
-        ___ProblemSolving
-        __Geography
-        __Mathematics
-    End Enum
-
-    'Calls main menu in Menu
+    'Calls Menu
     Sub Main()
-        Menu(MenuName._MainMenu)
+        Menu()
     End Sub
 
+    'Stores useable menu names as enums
+    Enum MenuName
+        _MainMenu
+        
+        'ComputerScience section
+        _MainMenu_ComputerScience
+
+        'Programming category
+        _MainMenu_ComputerScience_Programming
+        _MainMenu_ComputerScience_Programming_Basics
+        _MainMenu_ComputerScience_Programming_Selection
+        _MainMenu_ComputerScience_Programming_Iteration
+        _MainMenu_ComputerScience_Programming_Arrays
+        _MainMenu_ComputerScience_Programming_Subroutines
+        _MainMenu_ComputerScience_Programming_FileAndExceptionHandling
+        _MainMenu_ComputerScience_Programming_StructuredProgramming
+        _MainMenu_ComputerScience_Programming_ContactsList
+
+        'DataStructures category
+        _MainMenu_ComputerScience_DataStructures
+
+        'Algorithms category
+        _MainMenu_ComputerScience_Algorithms
+
+        'Computation category
+        _MainMenu_ComputerScience_Computation
+
+        'DataRepresentation category
+        _MainMenu_ComputerScience_DataRepresentation
+        _MainMenu_ComputerScience_DataRepresentation_NumberSystems
+        _MainMenu_ComputerScience_DataRepresentation_BinaryArithmetic
+        _MainMenu_ComputerScience_DataRepresentation_BitsAndBytes
+        _MainMenu_ComputerScience_DataRepresentation_CharacterCoding
+        _MainMenu_ComputerScience_DataRepresentation_SoundRepresentation
+        _MainMenu_ComputerScience_DataRepresentation_ImageRepresentation
+        _MainMenu_ComputerScience_DataRepresentation_CompressionAndEncryption
+
+        'ComputerSystems category
+        _MainMenu_ComputerScience_ComputerSystems
+        ____HardwareAndSoftware
+        ____RoleOfTheOS
+
+        'OrganizationAndArchitecture category
+        _MainMenu_ComputerScience_OrganizationAndArchitecture
+
+        'ConsequencesOfUse category
+        _MainMenu_ComputerScience_ConsequencesOfUse
+
+        'CommunicationAndNetworking category
+        _MainMenu_ComputerScience_CommunicationAndNetworking
+
+        'Databases category
+        _MainMenu_ComputerScience_Databases
+
+        'BigData category
+        _MainMenu_ComputerScience_BigData
+
+        'FunctionalProgramming category
+        _MainMenu_ComputerScience_FunctionalProgramming
+
+        'ProblemSolving category
+        _MainMenu_ComputerScience_ProblemSolving
+
+        'Geography section
+        _MainMenu_Geography
+
+        'Mathematics section
+        _MainMenu_Mathematics
+
+    End Enum
+
+    '2D array of all available menus
+    Private Const Menus(,) as String = {{"Programming", "Data Structures", "Algorithms", "Computation", "Data Representation", "Computer Systems", "Organization & Architecture", "Consequence of Use", "Communication & Networking", "Databases", "Big Data", "Functional Programming", "Problem Solving"},
+                                        {"Basics", "Selection", "Iteration", "Arrays", "Subroutines", "File & Exception Handling", "Structured Programming", "Contacts List", " ", " ", " ", " ", " "},
+                                        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                        {"Number Systems", "Binary Arithmetic", "Bits & Bytes", "Character Coding", "Sound Representation", "Image Representation", "Compression & Encryption", " ", " ", " ", " ", " ", " "},
+                                        {"Hardware & Software", "Role Of The OS", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                        {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "}}
+
+
+    'Stores the menu the user is currently in
+    Private SelectedMenu as MenuName = MainMenu
+
+    'Stores the menu the user was previously in
     Private PreviousMenu as MenuName
 
-    Sub Menu(SelectedMenu as MenuName)
-        'Declare 2D array of all available menus
-        Dim Menus(,) as String = {{"Programming", "Data Structures", "Algorithms", "Computation", "Data Representation", "Computer Systems", "Organization & Architecture", "Consequence of Use", "Communication & Networking", "Databases", "Big Data", "Functional Programming", "Problem Solving"},
-                                  {"Basics", "Selection", "Iteration", "Arrays", "Subroutines", "File & Exception Handling", "Structured Programming", "Contacts List", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {"Number Systems", "Binary Arithmetic", "Bits & Bytes", "Character Coding", "Sound Representation", "Image Representation", "Compression & Encryption", " ", " ", " ", " ", " ", " "},
-                                  {"Hardware & Software", "Role Of The OS", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                  {" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "}}
+    'Declares user's selected option in each menu
+    Private SelectedOption as Integer = 0
 
-        'Declares user's selected option as an integer
-        Dim SelectedOption as Integer = 0
+    'Ensures user can go back to previous menus
+    Private BackspacePressed as Boolean = False
 
-        'Ensures user can go back to previous menus
-        Dim BackspacePressed as Boolean = False
-
+    Sub Menu()
         'Loops menu until program is closed
         Do
             'Makes the cursor invisible and clears the console
@@ -92,15 +130,15 @@ Module Menu
                     'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                SelectedMenu = MenuName.__ComputerScience
+                                SelectedMenu = MenuName._MainMenu_ComputerScience
                             Case 1
-                                SelectedMenu = MenuName.__Geography
+                                SelectedMenu = MenuName._MainMenu_Geography
                             Case 2
-                                SelectedMenu = MenuName.__Mathematics
+                                SelectedMenu = MenuName._MainMenu_Mathematics
                         End Select
                     End If
                 
-                Case MenuName.__ComputerScience
+                Case MenuName._MainMenu_ComputerScience
                     'Calls menu interface with ComputerScience information
                     MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 13)
 
@@ -109,106 +147,106 @@ Module Menu
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                SelectedMenu = MenuName.___Programming
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Programming
                             Case 1
-                                SelectedMenu = MenuName.___DataStructures
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_DataStructures
                             Case 2
-                                SelectedMenu = MenuName.___Algorithms
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Algorithms
                             Case 3
-                                SelectedMenu = MenuName.___Computation
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Computation
                             Case 4
-                                SelectedMenu = MenuName.___DataRepresentation
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_DataRepresentation
                             Case 5
-                                SelectedMenu = MenuName.___ComputerSystems
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_ComputerSystems
                             Case 6
-                                SelectedMenu = MenuName.___OrganizationAndArchitecture
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_OrganizationAndArchitecture
                             Case 7
-                                SelectedMenu = MenuName.___ConsequencesOfUse
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_ConsequencesOfUse
                             Case 8
-                                SelectedMenu = MenuName.___CommunicationAndNetworking
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_CommunicationAndNetworking
                             Case 9
-                                SelectedMenu = MenuName.___Databases
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Databases
                             Case 10
-                                SelectedMenu = MenuName.___BigData
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_BigData
                             Case 11
-                                SelectedMenu = MenuName.___FunctionalProgramming
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_FunctionalProgramming
                             Case 12
-                                SelectedMenu = MenuName.___ProblemSolving
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_ProblemSolving
                         End Select
                     End If
 
-                Case MenuName.___Programming
+                Case MenuName._MainMenu_ComputerScience_Programming
                     'Calls menu interface with Programming information
                     MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 8)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                SelectedMenu = MenuName.____Basics
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Programming_Basics
                             Case 1
-                                SelectedMenu = MenuName.____Selection
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Programming_Selection
                             Case 2
-                                SelectedMenu = MenuName.____Iteration
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Programming_Iteration
                             Case 3
-                                SelectedMenu = MenuName.____Arrays
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Programming_Arrays
                             Case 4
-                                SelectedMenu = MenuName.____Subroutines
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Programming_Subroutines
                             Case 5
-                                SelectedMenu = MenuName.____FileAndExceptionHandling
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Programming_FileAndExceptionHandling
                             Case 6
-                                SelectedMenu = MenuName.____StructuredProgramming
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Programming_StructuredProgramming
                             Case 7
-                                SelectedMenu = MenuName.____ContactsList
+                                SelectedMenu = MenuName._MainMenu_ComputerScience_Programming_ContactsList
                         End Select
                     End If
                 
-                Case MenuName.____Basics
+                Case MenuName._MainMenu_ComputerScience_Programming_Basics
 
-                Case MenuName.____Selection
+                Case MenuName._MainMenu_ComputerScience_Programming_Selection
 
-                Case MenuName.____Iteration
+                Case MenuName._MainMenu_ComputerScience_Programming_Iteration
 
-                Case MenuName.____Arrays
+                Case MenuName._MainMenu_ComputerScience_Programming_Arrays
 
-                Case MenuName.____Subroutines
+                Case MenuName._MainMenu_ComputerScience_Programming_Subroutines
 
-                Case MenuName.____FileAndExceptionHandling
+                Case MenuName._MainMenu_ComputerScience_Programming_FileAndExceptionHandling
 
-                Case MenuName.____StructuredProgramming
+                Case MenuName._MainMenu_ComputerScience_Programming_StructuredProgramming
 
-                Case MenuName.____ContactsList
+                Case MenuName._MainMenu_ComputerScience_Programming_ContactsList
 
-                Case MenuName._DataStructures
+                Case MenuName._MainMenu_ComputerScience_DataStructures
                     'Calls menu interface with DataStructures information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+                    MenuInterface(0)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                'Call subroutine here
+                                'Call menu here
                         End Select
                     End If
                 
-                Case MenuName._Algorithms
+                Case MenuName._MainMenu_ComputerScience_Algorithms
                     'Calls menu interface with Algorithms information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+                    MenuInterface(0)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                'Call subroutine here
+                                'Call menu here
                         End Select
                     End If
                 
-                Case MenuName._Computation
+                Case MenuName._MainMenu_ComputerScience_Computation
                     'Calls menu interface with Computation information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+                    MenuInterface(0)
 
                     'Skips programs if backspace was pressed
                     If Not BackspacePressed Then
@@ -219,13 +257,13 @@ Module Menu
                         End Select
                     End If
                 
-                Case MenuName._DataRepresentation
+                Case MenuName._MainMenu_ComputerScience_DataRepresentation
                     'Calls menu interface with Programming information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 7)
+                    MenuInterface(7)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
                                 NumberSystems()
@@ -244,13 +282,13 @@ Module Menu
                         End Select
                     End If
                 
-                Case MenuName._ComputerSystems
+                Case MenuName._MainMenu_ComputerScience_ComputerSystems
                     'Calls menu interface with ComputerSystems information
                     MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 2)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
                                 HardwareAndSoftware()
@@ -259,94 +297,94 @@ Module Menu
                         End Select
                     End If
                 
-                Case MenuName._OrganizationAndArchitecture
+                Case MenuName._MainMenu_ComputerScience_OrganizationAndArchitecture
                     'Calls menu interface with OrganizationAndArchitecture information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+                    MenuInterface(0)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                'Call subroutine here
+                                'Call menu here
                         End Select
                     End If
                 
-                Case MenuName._ConsequencesOfUse
+                Case MenuName._MainMenu_ComputerScience_ConsequencesOfUse
                     'Calls menu interface with ConsequencesOfUse information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+                    MenuInterface(0)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                'Call subroutine here
+                                'Call menu here
                         End Select
                     End If
                 
-                Case MenuName._CommunicationAndNetworking
+                Case MenuName._MainMenu_ComputerScience_CommunicationAndNetworking
                     'Calls menu interface with CommunicationAndNetworking information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+                    MenuInterface(0)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                'Call subroutine here
+                                'Call menu here
                         End Select
                     End If
                 
-                Case MenuName._Databases
+                Case MenuName._MainMenu_ComputerScience_Databases
                     'Calls menu interface with Databases information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+                    MenuInterface(0)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                'Call subroutine here
+                                'Call menu here
                         End Select
                     End If
                 
-                Case MenuName._BigData
+                Case MenuName._MainMenu_ComputerScience_BigData
                     'Calls menu interface with BigData information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+                    MenuInterface(0)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides menu program to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                'Call subroutine here
+                                'Call menu here
                         End Select
                     End If
                 
-                Case MenuName._FunctionalProgramming
+                Case MenuName._MainMenu_ComputerScience_FunctionalProgramming
                     'Calls menu interface with FunctionalProgramming information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+                    MenuInterface(0)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                'Call subroutine here
+                                'Call menu here
                         End Select
                     End If
                 
-                Case MenuName._ProblemSolving
+                Case MenuName._MainMenu_ComputerScience_ProblemSolving
                     'Calls menu interface with ProblemSolving information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 0)
+                    MenuInterface(0)
 
-                    'Skips programs if backspace was pressed
+                    'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                        'Decides which program to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
-                                'Call subroutine here
+                                'Call menu here
                         End Select
                     End If
                 
@@ -354,7 +392,7 @@ Module Menu
         Loop
     End Sub
 
-    Sub MenuInterface(ByRef SelectedMenu as MenuName, ByRef SelectedOption as Integer, ByRef BackspacePressed as Boolean, Menus(,) as String, MenuSize as Integer)
+    Sub MenuInterface(MenuSize as Integer)
         'Stores information from Console.ReadKey()
         Dim MenuSelect as ConsoleKeyInfo
 
@@ -368,9 +406,9 @@ Module Menu
                 Case MenuName._MainMenu
                     Console.WriteLine("Main Menu:                           Navigate using arrows. Enter to select. Backspace to return.")
                 Case MenuName._Programming
-                    Console.WriteLine("Programming:                         Navigate using arrows. Enter to select. Backspace to return.")
+                    Console.WriteLine("~Programming:                         Navigate using arrows. Enter to select. Backspace to return.")
                 Case MenuName._DataStructures
-                    Console.WriteLine("Data Structures:                     Navigate using arrows. Enter to select. Backspace to return.")
+                    Console.WriteLine("~~Data Structures:                     Navigate using arrows. Enter to select. Backspace to return.")
                 Case MenuName._Algorithms
                     Console.WriteLine("Algorithms:                          Navigate using arrows. Enter to select. Backspace to return.")
                 Case MenuName._Computation
