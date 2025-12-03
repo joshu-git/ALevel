@@ -45,8 +45,8 @@ Module Menu
 
         'ComputerSystems category
         _MainMenu_ComputerScience_ComputerSystems
-        ____HardwareAndSoftware
-        ____RoleOfTheOS
+        _MainMenu_ComputerScience_ComputerSystems_HardwareAndSoftware
+        _MainMenu_ComputerScience_ComputerSystems_RoleOfTheOS
 
         'OrganizationAndArchitecture category
         _MainMenu_ComputerScience_OrganizationAndArchitecture
@@ -122,12 +122,14 @@ Module Menu
             'Select which menu to display
             Select Case SelectedMenu
                 Case MenuName._MainMenu
+                    PreviousMenu = MenuName._MainMenu
+
                     'Calls menu interface with MainMenu information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 13)
+                    MenuInterface(13)
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
-                    'Decides which menu to call based on selected option
+                        'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
                                 SelectedMenu = MenuName._MainMenu_ComputerScience
@@ -140,10 +142,12 @@ Module Menu
                 
                 Case MenuName._MainMenu_ComputerScience
                     'Calls menu interface with ComputerScience information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 13)
+                    MenuInterface(13)
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -177,10 +181,12 @@ Module Menu
 
                 Case MenuName._MainMenu_ComputerScience_Programming
                     'Calls menu interface with Programming information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 8)
+                    MenuInterface(8)
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_Programming
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -224,6 +230,8 @@ Module Menu
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_DataStructures
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -237,6 +245,8 @@ Module Menu
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_Algorithms
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -250,6 +260,8 @@ Module Menu
 
                     'Skips programs if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_Computation
+
                         'Decides which program to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -263,6 +275,8 @@ Module Menu
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_DataRepresentation
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -282,12 +296,28 @@ Module Menu
                         End Select
                     End If
                 
+                Case MenuName._MainMenu_ComputerScience_DataRepresentation_NumberSystems
+
+                Case MenuName._MainMenu_ComputerScience_DataRepresentation_BinaryArithmetic
+
+                Case MenuName._MainMenu_ComputerScience_DataRepresentation_BitsAndBytes
+
+                Case MenuName._MainMenu_ComputerScience_DataRepresentation_CharacterCoding
+
+                Case MenuName._MainMenu_ComputerScience_DataRepresentation_SoundRepresentation
+
+                Case MenuName._MainMenu_ComputerScience_DataRepresentation_ImageRepresentation
+
+                Case MenuName._MainMenu_ComputerScience_DataRepresentation_CompressionAndEncryption
+
                 Case MenuName._MainMenu_ComputerScience_ComputerSystems
                     'Calls menu interface with ComputerSystems information
-                    MenuInterface(SelectedMenu, SelectedOption, BackspacePressed, Menus, 2)
+                    MenuInterface(2)
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_ComputerSystems
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -303,6 +333,8 @@ Module Menu
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_OrganizationAndArchitecture
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -316,6 +348,8 @@ Module Menu
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_ConsequencesOfUse
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -331,6 +365,8 @@ Module Menu
                     If Not BackspacePressed Then
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
+                            PreviousMenu = MenuName._MainMenu_ComputerScience_CommunicationAndNetworking
+
                             Case 0
                                 'Call menu here
                         End Select
@@ -342,6 +378,8 @@ Module Menu
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_Databases
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -355,6 +393,8 @@ Module Menu
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_BigData
+
                         'Decides menu program to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -368,6 +408,8 @@ Module Menu
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_FunctionalProgramming
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -381,6 +423,8 @@ Module Menu
 
                     'Skips menus if backspace was pressed
                     If Not BackspacePressed Then
+                        PreviousMenu = MenuName._MainMenu_ComputerScience_ProblemSolving
+
                         'Decides which menu to call based on selected option
                         Select Case SelectedOption
                             Case 0
@@ -414,6 +458,7 @@ Module Menu
                     'Displays user's selected item in magenta
                     Console.ForegroundColor = ConsoleColor.Magenta
                     Console.Write(Menus(SelectedMenu, x).PadRight(30, " "))
+
                     'Sets the color back to white
                     Console.ForegroundColor = ConsoleColor.White
                 Else
@@ -426,8 +471,8 @@ Module Menu
             MenuSelect = Console.ReadKey()
             Select Case MenuSelect.Key
                 Case ConsoleKey.Backspace
-                    'Takes user back to the main menu
-                    SelectedMenu = MenuName._MainMenu
+                    'Takes user back to the previous menu
+                    SelectedMenu = PreviousMenu
                     BackspacePressed = True
                     Console.Clear()
                     Return
