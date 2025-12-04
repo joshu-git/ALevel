@@ -559,9 +559,9 @@ Module Programming
 
     '2D array of all available menus
     Private Const ContactsListMenus(,) as String = {{"Main Menu:", "Read People", "Enter Person", "Amend Person", "Delete Person"},
-                                                    {"Read People:", "Enter Name", "One By One", "All At Once", " "},
-                                                    {"Amend Person:", "Enter Position", "Select Person"},
-                                                    {""}}
+                                                    {"Read People:", "Enter ID", "Read All", " ", " "},
+                                                    {"Amend Person:", "Enter ID", "Select Person", " ", " "},
+                                                    {"Delete Person:", "Enter ID", "Select Person", " ", " "}}
 
     'Stores the menu the user is currently in
     Private ContactsListSelectedMenu as ContactsListMenuName = ContactsListMenuName._MainMenu
@@ -686,7 +686,82 @@ Module Programming
         'Makes cursor visible
         Console.CursorVisible = True
     End Sub
+    
+    'Record to match file csv structure
+    Type ContactsListInformation
+        ID as String
+        Age as String
+        Surname as String
+        Forename as String
+        PostCode as String
+        DateOfBirth As String
+    End Type
 
+    Private ContactsListSingleRecord as ContactsListInformation
+    Private ContactsListMultipleRecords() as ContactsListInformation
+
+    'Mode 0 = Enter ID
+    'Mode 2 = Read All
+    Sub ContactsListReadPeople(Mode as Integer)
+        Select Case Mode
+            Case 0
+                ContactsListEnterID()
+
+                'TODO: Displays contents of ContactsListSingleRecord
+            Case 1
+                'TODO: Get all content from file and display
+        End Select
+        Dim 
+    End Sub
+    
+    'Mode 0 = Default
+    Sub ContactsListEnterPerson(Mode as Integer)
+        Select Case Mode
+            Case 0
+
+        End Select
+    End Sub
+
+    'Mode 0 = Enter ID
+    'Mode 1 = Select Person
+    Sub ContactsListAmendPerson(Mode as Integer)
+        Select Case Mode
+            Case 0
+                ContactsListEnterID()
+            Case 1 
+                ContactsListSelectPerson()
+        End Select
+
+        
+    End Sub
+
+    'Mode 0 = Enter ID
+    'Mode 1 = Select Person
+    Sub ContactsListDeletePerson(Mode as Integer)
+        Select Case Mode
+            Case 0
+                ContactsListEnterID()
+            Case 1
+                ContactsListSelectPerson()
+        End Select
+    End Sub
+
+    Sub ContactsListEnterID(Mode As Integer)
+        Dim NotValid as Boolean = True
+
+        While NotValid
+            Console.Write("Please enter the person's ID: ")
+            Dim ID as String = Console.Readline()
+
+            'TODO: Iterate through file to check for ID
+        End While
+    End Sub
+
+    Sub ContactsListSelectPerson()
+        'TODO: Use arrows to navigate person by person
+
+        'TODO: When person enters store values in record
+    End Sub
 End Module
 
 Module Algorithms
