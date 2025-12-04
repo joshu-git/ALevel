@@ -95,7 +95,7 @@ Module Menu
 
 
     'Stores the menu the user is currently in
-    Private SelectedMenu as MenuName = MainMenu
+    Private SelectedMenu as MenuName = MenuName._MainMenu
 
     'Stores the menu the user was previously in
     Private PreviousMenu as MenuName
@@ -537,17 +537,155 @@ Module Programming
     Sub StructuredProgramming()
 
     End Sub
+                   
+    'Calls menu
+    Sub ContactsList()
+        ContactsListMenu()
+    End Sub
 
+    'Stores useable menu names as enums
     Enum ContactsListMenuName
         _MainMenu
+
+        'Read people section
+        _MainMenu_ReadPeople
+
+        'Amend person section
+        _MainMenu_AmendPerson
+        
+        'Delete person section
+        _MainMenu_DeletePerson
     End Enum
 
-    Sub ContactsList()
+    '2D array of all available menus
+    Private Const ContactsListMenus(,) as String = {{"Main Menu:", "Read People", "Enter Person", "Amend Person", "Delete Person"},
+                                                    {"Read People:", "Enter Name", "One By One", "All At Once", " "},
+                                                    {"Amend Person:", "Enter Position", "Select Person"},
+                                                    {""}}
 
+    'Stores the menu the user is currently in
+    Private ContactsListSelectedMenu as ContactsListMenuName = ContactsListMenuName._MainMenu
+
+    'Stores the menu the user was previously in
+    Private ContactsListPreviousMenu as ContactsListMenuName
+
+    'Declares user's selected option in each menu
+    Private ContactsListSelectedOption as Integer = 0
+
+    'Ensures user can go back to previous menu
+    Private ContactsListBackspacePressed as Boolean = False
+
+    Sub ContactsListMenu()
+        'Loops menu until program is closed
+        Do
+            'Makes the cursor invisible and clears the console
+            Console.CursorVisible = False
+            Console.Clear()
+
+
+            'If BackspacePressed is true it's set to false
+            If ContactsListBackspacePressed Then
+                ContactsListBackspacePressed = False
+            End If
+
+            'Select which menu to display
+            Select Case ContactsListSelectedMenu
+                Case ContactsListMenuName._MainMenu
+                    ContactsListPreviousMenu = ContactsListMenuName._MainMenu
+
+                    'Calls menu interface with MainMenu information
+                    MenuInterface(5)
+
+                    'Skips menus if backspace was pressed
+                    If Not ContactsListBackspacePressed Then
+                        'Decides which menu to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                ContactsListSelectedMenu = ContactsListMenuName._MainMenu_ReadPeople
+                            Case 1
+                                ContactsListEnterPerson()
+                            Case 2
+                                ContactsListSelectedMenu = ContactsListMenuName._MainMenu_AmendPerson
+                            Case 3
+                                ContactsListSelectedMenu = ContactsListMenuName._MainMenu_DeletePerson
+                        End Select
+                    End If
+            
+            End Select
+        Loop
     End Sub
-End Module
 
-Module DataStructures
+    Sub ContactsListMenuInterface(ContactsListMenuSize as Integer)
+        'Stores information from Console.ReadKey()
+        Dim ContactsListMenuSelect as ConsoleKeyInfo
+
+        'Reset select option to 0
+        ContactsListSelectedOption = 0
+
+        'Loops menu interface until enter is pressed
+        Do
+            'Displays selected menu information
+            Console.WriteLine(ContactsListMenus(ContactsListSelectedMenu, 0).PadRight(60, " ") & "Navigate using arrows. Enter to select. Backspace to return.")
+
+            'Displays selected menu with selected option highlighted
+            For x = 1 To ContactsListMenuSize - 1
+                'Adds a line break every four options
+                If x Mod 3 = 0 Then
+                    Console.WriteLine()
+                End If
+                If ContactsListSelectedOption = x Then
+                    'Displays user's selected item in magenta
+                    Console.ForegroundColor = ConsoleColor.Magenta
+                    Console.Write(ContactsListMenus(ContactsListSelectedMenu, x).PadRight(30, " "))
+
+                    'Sets the color back to white
+                    Console.ForegroundColor = ConsoleColor.White
+                Else
+                    'Displays unselected items
+                    Console.Write(ContactsListMenus(ContactsListSelectedMenu, x).PadRight(30, " "))
+                End If
+            Next
+
+            'Changes user's selected option in menu based on key press
+            ContactsListMenuSelect = Console.ReadKey()
+            Select Case ContactsListMenuSelect.Key
+                Case ConsoleKey.Backspace
+                    'Takes user back to the previous menu
+                    ContactsListSelectedMenu = ContactsListPreviousMenu
+                    ContactsListBackspacePressed = True
+                    Console.Clear()
+                    Return
+                Case ConsoleKey.LeftArrow
+                    'Checks if it can move selected option left
+                    If ContactsListSelectedOption - 1 > -1 Then
+                        'Moves selected option left
+                        ContactsListSelectedOption = ContactsListSelectedOption - 1
+                    End If
+                Case ConsoleKey.RightArrow
+                    'Checks if it can move selected option right
+                    If ContactsListSelectedOption + 1 < ContactsListMenuSize Then
+                        'Moves selected option right
+                        ContactsListSelectedOption = ContactsListSelectedOption + 1
+                    End If
+                Case ConsoleKey.UpArrow
+                    'Checks if it can move selected option up
+                    If ContactsListSelectedOption - 3 > -1 Then
+                        'Moves selected option up
+                        ContactsListSelectedOption = ContactsListSelectedOption - 3
+                    End If
+                Case ConsoleKey.DownArrow
+                    'Checks if it can move selected option down
+                    If ContactsListSelectedOption + 3 < ContactsListMenuSize Then
+                        'Moves selected option down
+                        ContactsListSelectedOption = ContactsListSelectedOption + 3
+                    End If
+            End Select
+            Console.Clear()
+        Loop Until MenuSelect.Key = ConsoleKey.Enter
+
+        'Makes cursor visible
+        Console.CursorVisible = True
+    End Sub
 
 End Module
 
