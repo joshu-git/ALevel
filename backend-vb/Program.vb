@@ -599,7 +599,7 @@ Module Programming
                     'Skips menus if backspace was pressed
                     If Not ContactsListBackspacePressed Then
                         'Decides which menu to call based on selected option
-                        Select Case SelectedOption
+                        Select Case ContactsListSelectedOption
                             Case 0
                                 ContactsListSelectedMenu = ContactsListMenuName._MainMenu_ReadPeople
                             Case 1
@@ -610,7 +610,52 @@ Module Programming
                                 ContactsListSelectedMenu = ContactsListMenuName._MainMenu_DeletePerson
                         End Select
                     End If
-            
+
+                Case ContactsListMenuName._MainMenu_ReadPeople
+                    'Calls menu interface with ReadPeople information
+                    MenuInterface(3)
+
+                    'Skips menus if program was pressed
+                    If Not ContactsListBackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                ContactsListReadPeople(0)
+                            Case 1
+                                ContactsListReadPeople(1)
+                        End Select
+                    End If
+
+                Case ContactsListMenuName._MainMenu_AmendPerson
+                    'Calls menu interface with MainMenu information
+                    MenuInterface(3)
+
+                    'Skips programs if backspace was pressed
+                    If Not ContactsListBackspacePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case ContactsListSelectedOption
+                            Case 0
+                                ContactsListAmendPerson(0)
+                            Case 1
+                                ContactsListAmendPerson(1)
+                        End Select
+                    End If
+
+                Case ContactsListMenuName._MainMenu_DeletePerson
+                    'Calls menu interface with MainMenu information
+                    MenuInterface(5)
+
+                    'Skips menus if backspace was pressed
+                    If Not ContactsListBackspacePressed Then
+                        'Decides which menu to call based on selected option
+                        Select Case ContactsListSelectedOption
+                            Case 0
+                                ContactsListDeletePerson(0)
+                            Case 1
+                                ContactsListDeletePerson(1)
+                        End Select
+                    End If
+
             End Select
         Loop
     End Sub
@@ -663,7 +708,7 @@ Module Programming
                     End If
                 Case ConsoleKey.RightArrow
                     'Checks if it can move selected option right
-                    If ContactsListSelectedOption + 1 < ContactsListMenuSize Then
+                    If ContactsListSelectedOption + 1 < ContactsListMenuSize - 1 Then
                         'Moves selected option right
                         ContactsListSelectedOption = ContactsListSelectedOption + 1
                     End If
@@ -675,7 +720,7 @@ Module Programming
                     End If
                 Case ConsoleKey.DownArrow
                     'Checks if it can move selected option down
-                    If ContactsListSelectedOption + 3 < ContactsListMenuSize Then
+                    If ContactsListSelectedOption + 3 < ContactsListMenuSize - 1 Then
                         'Moves selected option down
                         ContactsListSelectedOption = ContactsListSelectedOption + 3
                     End If
@@ -731,8 +776,6 @@ Module Programming
             Case 1 
                 ContactsListSelectPerson()
         End Select
-
-        
     End Sub
 
     'Mode 0 = Enter ID
