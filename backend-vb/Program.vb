@@ -864,7 +864,7 @@ Module Programming
                         .ID = Parts(0),
                         .Surname = Parts(1),
                         .Forename = Parts(2),
-                        .PostCode = Parts(3),
+                        .Postcode = Parts(3),
                         .DateOfBirth = Parts(4)
                     }
                     
@@ -1117,7 +1117,7 @@ Module Programming
         Private ID as String
         Private Surname as String
         Private Forename as String
-        Private PostCode as String
+        Private Postcode as String
         Private DateOfBirth As String
     End Structure
 
@@ -1156,18 +1156,58 @@ Module Programming
         Console.Readline()
     End Sub
     
-    'Mode 0 = Default enter
-    'Mode 1 = Append enter
-    Function ContactsListEnterPerson(Mode as Integer)
+    Subroutine ContactsListEnterPerson()
+        'Stores new person contents
+        Dim Entry as New ContactsListInformation
 
-        Select Case Mode
-            Case 0
-                'Nothing is returned as contents already entered
-                Return Nothing
-            Case 1
-                Return Contents
-        End Select
-    End Function
+        'Counts loop iterations
+        Dim Index as Integer = 0
+
+        'Runs loop 5 times with different options
+        Do
+            'Displays person enter information
+            Console.WriteLine("Person Select:".PadRight(30, " ") & "Enter to confirm." & VbCrLf)
+
+            Select Case Index
+                Case 0
+                    'Asks for ID on the first iteration
+                    Console.Write("Enter ID: ")
+                    Entry.ID = Console.ReadLine()
+
+                Case 1
+                    'Asks for surname on the second iteration
+                    Console.Write("Enter Surname: ")
+                    Entry.Surname = Console.ReadLine()
+
+                Case 2
+                    'Asks for forename on the third iteration
+                    Console.Write("Enter Forename: ")
+                    Entry.Forename = Console.ReadLine()
+
+                Case 3
+                    'Asks for postcode on the fourth iteration
+                    Console.Write("Enter Postcode: ")
+                    Entry.Postcode = Console.ReadLine()
+
+                Case 4
+                    'Asks for date of birth on the fifth iteration
+                    Console.Write("Enter Date of Birth: ")
+                    Entry.DateOfBirth = Console.ReadLine()
+
+            End Select
+
+            'Clears the console and adds loop count
+            Console.Clear()
+            Index = Index + 1
+        Loop Until Index = 4
+
+        'Adds entry to existing file contents list
+        ContactsListFileContents.Add(Entry)
+
+        'Allows user to view entered contents
+        Console.WriteLine($"Added: ID ~> {Entry.ID}, Surname ~> {Entry.Surname}, Forename ~> {Entry.Forename}, Postcode ~> {Entry.Postcode}, Date Of Birth ~> {Entry.DateOfBirth}")
+        Console.Readline()
+    End Subroutine
 
     'Mode 0 = Enter ID
     'Mode 1 = Select Person
@@ -1245,7 +1285,7 @@ Module Programming
 
         'Loops contents until enter is pressed
         Do
-            'Displays selected menu information
+            'Displays selected person information
             Console.WriteLine("Person Select:".PadRight(30, " ") & "Navigate using arrows. Enter to select. Backspace to return." & VbCrLf)
 
             Dim Contents = ContactsListFileContents(SelectedPerson)
@@ -1253,7 +1293,7 @@ Module Programming
 
             'Changes user's selected person in menu based on key press
             PersonSelect = Console.ReadKey()
-            Select Case ContactsListMenuSelect.Key
+            Select Case PersonSelect.Key
                 Case ConsoleKey.Backspace
                     'Clears the console and returns
                     Console.Clear()
