@@ -839,16 +839,16 @@ Module Programming
         _MainMenu_ReadPeople
 
         'Amend person section
-        _MainMenu_AmendPerson
+        _MainMenu_AppendPerson
         
         'Delete person section
         _MainMenu_DeletePerson
     End Enum
 
     '2D array of all available menus
-    Private ContactsListMenus(,) as String = {{"Main Menu:", "Read People", "Enter Person", "Amend Person", "Delete Person"},
+    Private ContactsListMenus(,) as String = {{"Main Menu:", "Read People", "Enter Person", "Append Person", "Delete Person"},
                                                     {"Read People:", "Enter ID", "Read All", " ", " "},
-                                                    {"Amend Person:", "Enter ID", "Select Person", " ", " "},
+                                                    {"Append Person:", "Enter ID", "Select Person", " ", " "},
                                                     {"Delete Person:", "Enter ID", "Select Person", " ", " "}}
 
     'Stores the menu the user is currently in
@@ -901,7 +901,7 @@ Module Programming
                             Case 1
                                 ContactsListEnterPerson()
                             Case 2
-                                ContactsListSelectedMenu = ContactsListMenuName._MainMenu_AmendPerson
+                                ContactsListSelectedMenu = ContactsListMenuName._MainMenu_AppendPerson
                             Case 3
                                 ContactsListSelectedMenu = ContactsListMenuName._MainMenu_DeletePerson
                         End Select
@@ -924,7 +924,7 @@ Module Programming
                         End Select
                     End If
 
-                Case ContactsListMenuName._MainMenu_AmendPerson
+                Case ContactsListMenuName._MainMenu_AppendPerson
                     ContactsListPreviousMenu = ContactsListMenuName._MainMenu
 
                     'Calls contacts list menu interface with MainMenu information
@@ -935,9 +935,9 @@ Module Programming
                         'Decides which program to call based on selected option
                         Select Case ContactsListSelectedOption
                             Case 0
-                                ContactsListAmendPerson(0)
+                                ContactsListAppendPerson(0)
                             Case 1
-                                ContactsListAmendPerson(1)
+                                ContactsListAppendPerson(1)
                         End Select
                     End If
 
@@ -1075,7 +1075,7 @@ Module Programming
 
     'Mode 0 = Enter ID
     'Mode 1 = Select Person
-    Sub ContactsListAmendPerson(Mode as Integer)
+    Sub ContactsListAppendPerson(Mode as Integer)
         Select Case Mode
             Case 0
                 ContactsListEnterID()
@@ -1097,11 +1097,13 @@ Module Programming
 
     Function ContactsListEnterID() as Integer
         Dim NotValid as Boolean = True
+        Dim 
 
         While NotValid
             Console.Write("Please enter the person's ID: ")
             Dim ID as String = Console.Readline()
 
+            For each
             'TODO: Iterate through file to check for ID
         End While
     End Function
