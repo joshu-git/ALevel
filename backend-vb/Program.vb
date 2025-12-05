@@ -957,7 +957,7 @@ Module Programming
                             Case 0
                                 ContactsListSelectedMenu = ContactsListMenuName._MainMenu_ReadPeople
                             Case 1
-                                ContactsListEnterPerson()
+                                ContactsListEnterPerson(0)
                             Case 2
                                 ContactsListSelectedMenu = ContactsListMenuName._MainMenu_AppendPerson
                             Case 3
@@ -1137,7 +1137,7 @@ Module Programming
                 'Checks if the function returned anything
                 If Result.HasValue Then
                     'Displays contents of selected ID
-                    Console.WriteLine($"ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
+                    Console.WriteLine($"Found: ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
                 Else
                     'Tells user that ID not found
                     Console.WriteLine("ID not found")
@@ -1158,14 +1158,16 @@ Module Programming
     
     'Mode 0 = Default enter
     'Mode 1 = Append enter
-    Sub ContactsListEnterPerson(Mode as Integer)
+    Function ContactsListEnterPerson(Mode as Integer)
+
         Select Case Mode
             Case 0
-
+                'Nothing is returned as contents already entered
+                Return Nothing
             Case 1
-
+                Return Contents
         End Select
-    End Sub
+    End Function
 
     'Mode 0 = Enter ID
     'Mode 1 = Select Person
@@ -1178,7 +1180,7 @@ Module Programming
                 'Checks if the function returned anything
                 If Result.HasValue Then
                     'Displays contents of selected ID
-                    Console.WriteLine($"ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
+                    Console.WriteLine($"Found: ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
                 Else
                     'Tells user that ID not found
                     Console.WriteLine("ID not found")
@@ -1201,7 +1203,7 @@ Module Programming
                 'Checks if the function returned anything
                 If Result.HasValue Then
                     'Displays contents of selected ID
-                    Console.WriteLine($"ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
+                    Console.WriteLine($"Found: ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
                 Else
                     'Tells user that ID not found
                     Console.WriteLine("ID not found")
@@ -1213,8 +1215,8 @@ Module Programming
         End Select
     End Sub
 
-    'Returns user's selected ID location
-    Function ContactsListEnterID() as Integer
+    'Returns user's selected person via ID
+    Function ContactsListEnterID() as Nullable(Of ContactsListInformation)
         'Asks and stores the user's selected ID
         Console.Write("Please enter the person's ID: ")
         Dim ID as String = Console.Readline()
@@ -1225,17 +1227,60 @@ Module Programming
         'Finds the matching contents for the ID
         For Each Contents In ContactsListFileContents
             If ID = Contents.ID
-            Return Contents
+                Return Contents
+            End If
         Next
 
         'If ID not found nothing is returned
         Return Nothing
     End Function
 
-    Function ContactsListSelectPerson()
-        'TODO: Use arrows to navigate person by person
+    'Returns users selected person via interface
+    Function ContactsListSelectPerson() as Nullable(Of COntactsListInformation)
+        'Stores information from Console.ReadKey()
+        Dim PersonSelect as ConsoleKeyInfo
 
-        'TODO: When person enters store values in record
+        'Reset select option to 0
+        SelectedPerson = 0
+
+        'Loops contents until enter is pressed
+        Do
+            'Displays selected menu information
+            Console.WriteLine("Person Select:".PadRight(30, " ") & "Navigate using arrows. Enter to select. Backspace to return." & VbCrLf)
+
+            Dim Contents = ContactsListFileContents(SelectedPerson)
+            Console.WriteLine($"Found: ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
+
+            'Changes user's selected person in menu based on key press
+            PersonSelect = Console.ReadKey()
+            Select Case ContactsListMenuSelect.Key
+                Case ConsoleKey.Backspace
+                    'Clears the console and returns
+                    Console.Clear()
+                    Return Nothing
+
+                Case ConsoleKey.UpArrow
+                    'Checks if it can move selected person up
+                    If PersonSelect > 0 Then
+                        'Moves selected person up
+                        PersonSelect = PersonSelect - 1
+                    End If
+
+                Case ConsoleKey.DownArrow
+                    'Checks if it can move selected option down
+                    If PersonSelect < ContactsListFileContents - 1 Then
+                        'Moves selected option down
+                        PersonSelect = PersonSelect + 1
+                    End If
+
+            End Select
+
+            'Clear the console before updating
+            Console.Clear()
+        Loop Until PersonSelect.Key = ConsoleKey.Enter
+
+        'Return the contents of the selected person
+        Return ContactsListFileContents(PersonSelect)
     End Function
 End Module
 
