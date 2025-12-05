@@ -757,38 +757,48 @@ Module Menu
                     'Takes user back to the previous menu
                     SelectedMenu = PreviousMenu
                     BackspacePressed = True
+
+                    'Clears the console and returns
                     Console.Clear()
                     Return
+
                 Case ConsoleKey.Escape
                     'Takes user out of the entire program
                     EscapePressed = True
                     Console.Clear()
                     Return
+
                 Case ConsoleKey.LeftArrow
                     'Checks if it can move selected option left
                     If SelectedOption - 1 > -1 Then
                         'Moves selected option left
                         SelectedOption = SelectedOption - 1
                     End If
+
                 Case ConsoleKey.RightArrow
                     'Checks if it can move selected option right
                     If SelectedOption + 1 < MenuSize - 1 Then
                         'Moves selected option right
                         SelectedOption = SelectedOption + 1
                     End If
+
                 Case ConsoleKey.UpArrow
                     'Checks if it can move selected option up
                     If SelectedOption - 3 > -1 Then
                         'Moves selected option up
                         SelectedOption = SelectedOption - 3
                     End If
+
                 Case ConsoleKey.DownArrow
                     'Checks if it can move selected option down
                     If SelectedOption + 3 < MenuSize - 1 Then
                         'Moves selected option down
                         SelectedOption = SelectedOption + 3
                     End If
+
             End Select
+
+            'Clear the console before updating
             Console.Clear()
         Loop Until MenuSelect.Key = ConsoleKey.Enter
 
@@ -1032,6 +1042,7 @@ Module Programming
                 If (x - 1) Mod 3 = 0 Then
                     Console.WriteLine()
                 End If
+
                 If ContactsListSelectedOption + 1 = x Then
                     'Displays user's selected item in magenta
                     Console.ForegroundColor = ConsoleColor.Magenta
@@ -1052,38 +1063,48 @@ Module Programming
                     'Takes user back to the previous menu
                     ContactsListSelectedMenu = ContactsListPreviousMenu
                     ContactsListBackspacePressed = True
+
+                    'Clears the console and returns
                     Console.Clear()
                     Return
+
                 Case ConsoleKey.Escape
                     'Takes user out of the contacts list program
                     ContactsListEscapePressed = True
                     Console.Clear()
                     Return
+
                 Case ConsoleKey.LeftArrow
                     'Checks if it can move selected option left
                     If ContactsListSelectedOption - 1 > -1 Then
                         'Moves selected option left
                         ContactsListSelectedOption = ContactsListSelectedOption - 1
                     End If
+
                 Case ConsoleKey.RightArrow
                     'Checks if it can move selected option right
                     If ContactsListSelectedOption + 1 < ContactsListMenuSize - 1 Then
                         'Moves selected option right
                         ContactsListSelectedOption = ContactsListSelectedOption + 1
                     End If
+
                 Case ConsoleKey.UpArrow
                     'Checks if it can move selected option up
                     If ContactsListSelectedOption - 3 > -1 Then
                         'Moves selected option up
                         ContactsListSelectedOption = ContactsListSelectedOption - 3
                     End If
+
                 Case ConsoleKey.DownArrow
                     'Checks if it can move selected option down
                     If ContactsListSelectedOption + 3 < ContactsListMenuSize - 1 Then
                         'Moves selected option down
                         ContactsListSelectedOption = ContactsListSelectedOption + 3
                     End If
+
             End Select
+
+            'Clear the console before updating
             Console.Clear()
         Loop Until ContactsListMenuSelect.Key = ConsoleKey.Enter
 
