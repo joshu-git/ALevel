@@ -1223,7 +1223,7 @@ Module Programming
                 'Fetches contents of user's ID
                 Dim Result = ContactsListEnterID()
                 
-                'Displays append people information
+                'Displays append person information
                 Console.WriteLine("Append Person:" & VbCrLf)
 
                 'Checks if the function returned anything
@@ -1233,6 +1233,8 @@ Module Programming
 
                     'Lets user read current contents
                     Console.Readline()
+                    Console.Clear()
+
                 Else
                     'Tells user that ID not found
                     Console.WriteLine("ID not found")
@@ -1262,7 +1264,7 @@ Module Programming
                 Case 0
                     'Asks for new surname on first iteration
                     Console.Write($"Current Surname: {Old.Surname}   ~>   New Surname: ")
-                    Dim NewSurname = Console.ReadLine()
+                    Dim NewSurname as String = Console.ReadLine()
 
                     'If no changes keep old contents
                     If NewSurname = "" Then 
@@ -1272,7 +1274,7 @@ Module Programming
                 Case 1
                     'Asks for new forename on second iteration
                     Console.Write($"Current Forename: {Old.Forename}   ~>   New Forename: ")
-                    Dim NewForename = Console.ReadLine()
+                    Dim NewForename as String = Console.ReadLine()
 
                     'If no changes keep old contents
                     If NewForename = "" Then 
@@ -1282,7 +1284,7 @@ Module Programming
                 Case 2
                     'Asks for new postcode on third iteration
                     Console.Write($"Current Postcode: {Old.Postcode}   ~>   New Postcode: ")
-                    Dim NewPostcode = Console.ReadLine()
+                    Dim NewPostcode as String = Console.ReadLine()
 
                     'If no changes keep old contents
                     If NewPostcode = "" Then 
@@ -1292,7 +1294,7 @@ Module Programming
                 Case 3
                     'Asks for new date of birth on fourth iteration
                     Console.Write($"Current Date Of Birth: {Old.DateOfBirth}   ~>   New Date Of Birth: ")
-                    Dim NewDateOfBirth = Console.ReadLine()
+                    Dim NewDateOfBirth as String = Console.ReadLine()
 
                     'If no changes keep old contents
                     If NewDateOfBirth = "" Then 
@@ -1335,20 +1337,69 @@ Module Programming
             Case 0
                 'Fetches contents of user's ID
                 Dim Result = ContactsListEnterID()
+
+                'Displays delete person information
+                Console.WriteLine("Delete Person:" & VbCrLf)
                 
                 'Checks if the function returned anything
                 If Result.HasValue Then
                     'Displays contents of selected ID
                     Console.WriteLine($"Found: ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
+                
+                    'Lets user read current contents
+                    Console.Readline()
+                    Console.Clear()
+
                 Else
                     'Tells user that ID not found
                     Console.WriteLine("ID not found")
+
+                    'Gives reading time then returns
+                    Console.Readline()
+                    Return
+
                 End If
 
             Case 1
                 Dim Result = ContactsListSelectPerson()
 
         End Select
+
+        Dim Person = Result.value
+
+        'Displays selected person information
+        Console.WriteLine("Delete Person:".PadRight(30, " ") & "Enter to confirm." & VbCrLf)
+
+        'Confirms the user definitely wants to delete this contact
+        Console.WriteLine($"Are you sure you want to delete {Person.Forename} {Person.Surname}? (Y/N)")
+        Dim UserInput as String = Console.Readline()
+
+        'Clear confirmation
+        Console.Clear()
+
+        'Displays delete person information
+        Console.WriteLine("Delete Person:" & VbCrLf)
+
+        'If they input "Y" then delete it
+        If UserInput = "Y" Then
+            'Iterates through the list to find matching ID
+            For I = 0 To ContactsListFileContents.Count - 1
+                'Once matching ID is found delete entry
+                If ContactsListFileContents(I).ID = person.ID Then
+                    ContactsListFileContents.RemoveAt(I)
+
+                    'Allows user to view deleted contents
+                    Console.WriteLine($"Deleted: ID ~> {Person.ID}, Surname ~> {Person.Surname}, Forename ~> {Person.Forename}, Postcode ~> {Person.Postcode}, Date Of Birth ~> {Person.DateOfBirth}")
+                    Console.Readline()
+
+                    'Exits the for loop as matching ID was found
+                    Exit For
+                End If
+            Next
+        Else
+            'Confirms cancellation
+            Console.WriteLine("Delete cancelled.")
+        End If
     End Sub
 
     'Returns user's selected person via ID
