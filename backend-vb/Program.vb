@@ -839,21 +839,23 @@ Module Programming
         'Stores all lines from the csv file
         Dim Lines() as String = File.ReadAllLines(ContactsListFilePath)
 
+        'Splits each line to structured list
         For Each Line as String in Lines
+
+            'Checks if the Line is null
             If Not String.IsNullOrWhiteSpace(Line) Then
                 Dim Parts() As String = Line.Split(",")
 
                 'Checks for correct length
-                If Parts.Length = 6 Then
+                If Parts.Length = 5 Then
 
                     'If length is correct is writes to Contents
                     Dim Contents As New ContactsListInformation With {
                         .ID = Parts(0),
-                        .Age = Parts(1),
-                        .Surname = Parts(2),
-                        .Forename = Parts(3),
-                        .PostCode = Parts(4),
-                        .DateOfBirth = Parts(5)
+                        .Surname = Parts(1),
+                        .Forename = Parts(2),
+                        .PostCode = Parts(3),
+                        .DateOfBirth = Parts(4)
                     }
                     
                     'Contents is written to the list
@@ -870,7 +872,7 @@ Module Programming
 
         'Converts contents from structure to list
         For Each Contents in ContactsListFileContents
-            NewLines.Add($"{Contents.ID},{Contents.Age},{Contents.Surname},{Contents.Forename},{Contents.Postcode},{Contents.DateOfBirth}")
+            NewLines.Add($"{Contents.ID},{Contents.Surname},{Contents.Forename},{Contents.Postcode},{Contents.DateOfBirth}")
         Next
 
         'Wipes and writes all lines into file
@@ -1092,7 +1094,6 @@ Module Programming
     'Record to match file csv structure
     Private Structure ContactsListInformation
         Private ID as String
-        Private Age as String
         Private Surname as String
         Private Forename as String
         Private PostCode as String
@@ -1109,16 +1110,40 @@ Module Programming
     Sub ContactsListReadPeople(Mode as Integer)
         Select Case Mode
             Case 0
-                ContactsListEnterID()
+                'Fetches contents of user's ID
+                Dim Result = ContactsListEnterID()
 
-                'TODO: Displays contents of ContactsListSingleRecord
+                'Checks if the function returned anything
+                If Result.HasValue Then
+                    'Displays contents of selected ID
+                    Console.WriteLine($"ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
+                Else
+                    'Tells user that ID not found
+                    Console.WriteLine("ID not found")
+                End If
+
             Case 1
-                'TODO: Get all content from file and display
+                'Displays all file contents
+                For Each Contents In ContactsListFileContents
+                    'Writes content of each line
+                    Console.WriteLine($"ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
+                Next
+
         End Select
+
+        'Allows user to view contents
+        Console.Readline()
     End Sub
     
-    Sub ContactsListEnterPerson()
-        
+    'Mode 0 = Default enter
+    'Mode 1 = Append enter
+    Sub ContactsListEnterPerson(Mode as Integer)
+        Select Case Mode
+            Case 0
+
+            Case 1
+
+        End Select
     End Sub
 
     'Mode 0 = Enter ID
@@ -1126,9 +1151,21 @@ Module Programming
     Sub ContactsListAppendPerson(Mode as Integer)
         Select Case Mode
             Case 0
-                ContactsListEnterID()
+                'Fetches contents of user's ID
+                Dim Result = ContactsListEnterID()
+                
+                'Checks if the function returned anything
+                If Result.HasValue Then
+                    'Displays contents of selected ID
+                    Console.WriteLine($"ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
+                Else
+                    'Tells user that ID not found
+                    Console.WriteLine("ID not found")
+                End If
+
             Case 1 
-                ContactsListSelectPerson()
+                Dim Result = ContactsListSelectPerson()
+
         End Select
     End Sub
 
@@ -1137,30 +1174,48 @@ Module Programming
     Sub ContactsListDeletePerson(Mode as Integer)
         Select Case Mode
             Case 0
-                ContactsListEnterID()
+                'Fetches contents of user's ID
+                Dim Result = ContactsListEnterID()
+                
+                'Checks if the function returned anything
+                If Result.HasValue Then
+                    'Displays contents of selected ID
+                    Console.WriteLine($"ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
+                Else
+                    'Tells user that ID not found
+                    Console.WriteLine("ID not found")
+                End If
+
             Case 1
-                ContactsListSelectPerson()
+                Dim Result = ContactsListSelectPerson()
+
         End Select
     End Sub
 
+    'Returns user's selected ID location
     Function ContactsListEnterID() as Integer
-        Dim NotValid as Boolean = True
-        Dim 
+        'Asks and stores the user's selected ID
+        Console.Write("Please enter the person's ID: ")
+        Dim ID as String = Console.Readline()
 
-        While NotValid
-            Console.Write("Please enter the person's ID: ")
-            Dim ID as String = Console.Readline()
+        'Clears the console
+        Console.Clear()
 
-            For each
-            'TODO: Iterate through file to check for ID
-        End While
+        'Finds the matching contents for the ID
+        For Each Contents In ContactsListFileContents
+            If ID = Contents.ID
+            Return Contents
+        Next
+
+        'If ID not found nothing is returned
+        Return Nothing
     End Function
 
-    Sub ContactsListSelectPerson()
+    Function ContactsListSelectPerson()
         'TODO: Use arrows to navigate person by person
 
         'TODO: When person enters store values in record
-    End Sub
+    End Function
 End Module
 
 Module Algorithms
