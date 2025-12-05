@@ -826,9 +826,55 @@ Module Programming
 
     End Sub
                    
-    'Calls menu
     Sub ContactsListMain()
+        'Clears content list in case this is ran twice
+        ContactsListFileContents.Clear()
+
+        'Checks if the file exists
+        If Not File.Exists(ContactsListFilePath) Then
+            'If it doesn't exist it creates it
+            File.Create(ContactsListFilePath)
+        End If
+
+        'Stores all lines from the csv file
+        Dim Lines() as String = File.ReadAllLines(ContactsListFilePath)
+
+        For Each Line as String in Lines
+            If Not String.IsNullOrWhiteSpace(Line) Then
+                Dim Parts() As String = Line.Split(",")
+
+                'Checks for correct length
+                If Parts.Length = 6 Then
+
+                    'If length is correct is writes to Contents
+                    Dim Contents As New ContactsListInformation With {
+                        .ID = Parts(0),
+                        .Age = Parts(1),
+                        .Surname = Parts(2),
+                        .Forename = Parts(3),
+                        .PostCode = Parts(4),
+                        .DateOfBirth = Parts(5)
+                    }
+                    
+                    'Contents is written to the list
+                    ContactsListFileContents.Add(Contents)
+                End If
+            End If
+        Next
+
+        'Calls menu
         ContactsListMenu()
+
+        'Stores contents in string list
+        Dim NewLines as New List(Of String)
+
+        'Converts contents from structure to list
+        For Each Contents in ContactsListFileContents
+            NewLines.Add($"{Contents.ID},{Contents.Age},{Contents.Surname},{Contents.Forename},{Contents.Postcode},{Contents.DateOfBirth}")
+        Next
+
+        'Wipes and writes all lines into file
+        File.WriteAllLines(ContactsListFilePath, NewLines)
     End Sub
 
     'Stores useable menu names as enums
@@ -847,9 +893,9 @@ Module Programming
 
     '2D array of all available menus
     Private ContactsListMenus(,) as String = {{"Main Menu:", "Read People", "Enter Person", "Append Person", "Delete Person"},
-                                                    {"Read People:", "Enter ID", "Read All", " ", " "},
-                                                    {"Append Person:", "Enter ID", "Select Person", " ", " "},
-                                                    {"Delete Person:", "Enter ID", "Select Person", " ", " "}}
+                                              {"Read People:", "Enter ID", "Read All", " ", " "},
+                                              {"Append Person:", "Enter ID", "Select Person", " ", " "},
+                                              {"Delete Person:", "Enter ID", "Select Person", " ", " "}}
 
     'Stores the menu the user is currently in
     Private ContactsListSelectedMenu as ContactsListMenuName = ContactsListMenuName._MainMenu
@@ -1044,17 +1090,19 @@ Module Programming
     End Sub
     
     'Record to match file csv structure
-    Structure ContactsListInformation
-        Dim ID as String
-        Dim Age as String
-        Dim Surname as String
-        Dim Forename as String
-        Dim PostCode as String
-        Dim DateOfBirth As String
+    Private Structure ContactsListInformation
+        Private ID as String
+        Private Age as String
+        Private Surname as String
+        Private Forename as String
+        Private PostCode as String
+        Private DateOfBirth As String
     End Structure
 
-    Private ContactsListSingleRecord as ContactsListInformation
-    Private ContactsListMultipleRecords() as ContactsListInformation
+    'Stores everything from file + user changes
+    Private ContactsListFileContents as New List(of ContactsListInformation)
+
+    Private ContactsListFilePath as String = "ContactsList.csv"
 
     'Mode 0 = Enter ID
     'Mode 2 = Read All
