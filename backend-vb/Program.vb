@@ -1,4 +1,5 @@
 Imports System
+Imports System.IO
 
 Module Menu
     'Calls Menu
@@ -957,7 +958,7 @@ Module Programming
                             Case 0
                                 ContactsListSelectedMenu = ContactsListMenuName._MainMenu_ReadPeople
                             Case 1
-                                ContactsListEnterPerson(0)
+                                ContactsListEnterPerson()
                             Case 2
                                 ContactsListSelectedMenu = ContactsListMenuName._MainMenu_AppendPerson
                             Case 3
@@ -1113,12 +1114,12 @@ Module Programming
     End Sub
     
     'Record to match file csv structure
-    Private Structure ContactsListInformation
-        Private ID as String
-        Private Surname as String
-        Private Forename as String
-        Private Postcode as String
-        Private DateOfBirth As String
+    Public Structure ContactsListInformation
+        Public ID as String
+        Public Surname as String
+        Public Forename as String
+        Public Postcode as String
+        Public DateOfBirth As String
     End Structure
 
     'Stores everything from file + user changes
@@ -1139,6 +1140,9 @@ Module Programming
 
                 'Checks if the function returned anything
                 If Result.HasValue Then
+                    'Stores contents in structure format
+                    Dim Contents = Result.Value
+
                     'Displays contents of selected ID
                     Console.WriteLine($"Found: ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
                 Else
@@ -1162,7 +1166,7 @@ Module Programming
         Console.Readline()
     End Sub
     
-    Subroutine ContactsListEnterPerson()
+    Sub ContactsListEnterPerson()
         'Stores new person contents
         Dim Entry as New ContactsListInformation
 
@@ -1171,14 +1175,52 @@ Module Programming
 
         'Runs loop five times with different options
         Do
-            'Displays person enter information
-            Console.WriteLine("Person Select:".PadRight(30, " ") & "Enter to confirm." & VbCrLf)
+            'Displays enter person information
+            Console.WriteLine("Enter Person:".PadRight(30, " ") & "Enter to confirm." & VbCrLf)
 
             Select Case Index
                 Case 0
-                    'Asks for ID on the first iteration
-                    Console.Write("Enter ID: ")
-                    Entry.ID = Console.ReadLine()
+                    'Stores if there a is a duplicate
+                    Dim Duplicate As Boolean = False
+
+                    Do
+                        'Asks for ID on the first iteration
+                        Console.Write("Enter ID: ")
+                        Entry.ID = Console.ReadLine()
+
+                        'Checks to see if the entered ID is empty
+                        If String.IsNullOrWhiteSpace(Entry.ID) Then
+                            'Clears the console
+                            Console.Clear()
+                        
+                            'Displays enter person information
+                            Console.WriteLine("Enter Person:" & VbCrLf)
+
+                            'Tells user the ID cannot be empty
+                            Console.WriteLine("ID cannot be empty.")
+
+                            'User reads reason then it restarts loop
+                            Console.Readline()
+                            Continue Do
+                        End If
+
+                        'Iterates through file contents to find duplicate
+                        For Each Person In ContactsListFileContents
+                            'If a duplicate is found it is set to true
+                            If Person.ID = Entry.ID Then
+                                Duplicate = True
+                            
+                                'Displays enter person information
+                                Console.WriteLine("Person Enter:" & VbCrLf)
+
+                                'Tells user their ID is a duplicate
+                                Console.WriteLine("That ID already exists. Please enter a different ID.")
+
+                                'Leave the for loop as the duplicate has been found
+                                Exit For
+                            End If
+                        Next
+                    Loop Until Not Duplicate
 
                 Case 1
                     'Asks for surname on the second iteration
@@ -1205,29 +1247,38 @@ Module Programming
             'Clears the console and adds loop count
             Console.Clear()
             Index = Index + 1
-        Loop Until Index = 4
+        Loop Until Index = 5
 
         'Adds entry to existing file contents list
         ContactsListFileContents.Add(Entry)
 
+        'Displays enter person information
+        Console.WriteLine("Enter Person:" & VbCrLf)
+
         'Allows user to view entered contents
         Console.WriteLine($"Added: ID ~> {Entry.ID}, Surname ~> {Entry.Surname}, Forename ~> {Entry.Forename}, Postcode ~> {Entry.Postcode}, Date Of Birth ~> {Entry.DateOfBirth}")
         Console.Readline()
-    End Subroutine
+    End Sub
 
     'Mode 0 = Enter ID
     'Mode 1 = Select Person
     Sub ContactsListAppendPerson(Mode as Integer)
+
+        Dim Result as ContactsListInformation?
+
         Select Case Mode
             Case 0
                 'Fetches contents of user's ID
-                Dim Result = ContactsListEnterID()
+                Result = ContactsListEnterID()
                 
                 'Displays append person information
                 Console.WriteLine("Append Person:" & VbCrLf)
 
                 'Checks if the function returned anything
                 If Result.HasValue Then
+                    'Stores contents in structure format
+                    Dim Contents = Result.Value
+
                     'Displays contents of selected ID
                     Console.WriteLine($"Found: ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
 
@@ -1246,7 +1297,7 @@ Module Programming
                 End If
 
             Case 1 
-                Dim Result = ContactsListSelectPerson()
+                Result = ContactsListSelectPerson()
 
         End Select
 
@@ -1256,6 +1307,8 @@ Module Programming
         'Counts loop iterations
         Dim Index as Integer = 0
 
+        Dim NewSurname, NewForeName, NewPostcode, NewDateOfBirth as String
+
         Do
             'Displays append person information
             Console.WriteLine("Append Person:".PadRight(30, " ") & "Enter to confirm. Leave blank to maintain value." & VbCrLf)
@@ -1264,7 +1317,7 @@ Module Programming
                 Case 0
                     'Asks for new surname on first iteration
                     Console.Write($"Current Surname: {Old.Surname}   ~>   New Surname: ")
-                    Dim NewSurname as String = Console.ReadLine()
+                    NewSurname = Console.ReadLine()
 
                     'If no changes keep old contents
                     If NewSurname = "" Then 
@@ -1274,7 +1327,7 @@ Module Programming
                 Case 1
                     'Asks for new forename on second iteration
                     Console.Write($"Current Forename: {Old.Forename}   ~>   New Forename: ")
-                    Dim NewForename as String = Console.ReadLine()
+                    NewForename = Console.ReadLine()
 
                     'If no changes keep old contents
                     If NewForename = "" Then 
@@ -1284,7 +1337,7 @@ Module Programming
                 Case 2
                     'Asks for new postcode on third iteration
                     Console.Write($"Current Postcode: {Old.Postcode}   ~>   New Postcode: ")
-                    Dim NewPostcode as String = Console.ReadLine()
+                    NewPostcode = Console.ReadLine()
 
                     'If no changes keep old contents
                     If NewPostcode = "" Then 
@@ -1294,7 +1347,7 @@ Module Programming
                 Case 3
                     'Asks for new date of birth on fourth iteration
                     Console.Write($"Current Date Of Birth: {Old.DateOfBirth}   ~>   New Date Of Birth: ")
-                    Dim NewDateOfBirth as String = Console.ReadLine()
+                    NewDateOfBirth = Console.ReadLine()
 
                     'If no changes keep old contents
                     If NewDateOfBirth = "" Then 
@@ -1306,7 +1359,7 @@ Module Programming
             'Clears the console and adds loop count
             Console.Clear()
             Index = Index + 1
-        Loop Until Index = 3
+        Loop Until Index = 4
 
         'Iterates through the list to find matching ID
         For I = 0 To ContactsListFileContents.Count - 1
@@ -1321,7 +1374,7 @@ Module Programming
                 }
 
                 'Allows user to view entered contents
-                Console.WriteLine($"Added: ID ~> {Entry.ID}, Surname ~> {Entry.Surname}, Forename ~> {Entry.Forename}, Postcode ~> {Entry.Postcode}, Date Of Birth ~> {Entry.DateOfBirth}")
+                Console.WriteLine($"Added: ID ~> {Old.ID}, Surname ~> {NewSurname}, Forename ~> {NewForename}, Postcode ~> {NewPostcode}, Date Of Birth ~> {NewDateOfBirth}")
                 Console.Readline()
 
                 'Exits the for loop as matching ID was found
@@ -1333,16 +1386,22 @@ Module Programming
     'Mode 0 = Enter ID
     'Mode 1 = Select Person
     Sub ContactsListDeletePerson(Mode as Integer)
+
+        Dim Result as ContactsListInformation?
+        
         Select Case Mode
             Case 0
                 'Fetches contents of user's ID
-                Dim Result = ContactsListEnterID()
+                Result = ContactsListEnterID()
 
                 'Displays delete person information
                 Console.WriteLine("Delete Person:" & VbCrLf)
                 
                 'Checks if the function returned anything
                 If Result.HasValue Then
+                    'Stores contents in structure format
+                    Dim Contents = Result.Value
+
                     'Displays contents of selected ID
                     Console.WriteLine($"Found: ID ~> {Contents.ID}, Surname ~> {Contents.Surname}, Forename ~> {Contents.Forename}, Postcode ~> {Contents.Postcode}, Date Of Birth ~> {Contents.DateOfBirth}")
                 
@@ -1361,7 +1420,7 @@ Module Programming
                 End If
 
             Case 1
-                Dim Result = ContactsListSelectPerson()
+                Result = ContactsListSelectPerson()
 
         End Select
 
@@ -1403,7 +1462,7 @@ Module Programming
     End Sub
 
     'Returns user's selected person via ID
-    Function ContactsListEnterID() as Nullable(Of ContactsListInformation)
+    Function ContactsListEnterID() as ContactsListInformation?
         'Displays enter ID information
         Console.WriteLine("Enter ID:" & VbCrLf)
 
@@ -1426,12 +1485,12 @@ Module Programming
     End Function
 
     'Returns users selected person via interface
-    Function ContactsListSelectPerson() as Nullable(Of COntactsListInformation)
+    Function ContactsListSelectPerson() as ContactsListInformation?
         'Stores information from Console.ReadKey()
         Dim PersonSelect as ConsoleKeyInfo
 
-        'Reset select option to 0
-        SelectedPerson = 0
+        'Sets selected person to the first
+        Dim SelectedPerson as Integer = 0
 
         'Loops contents until enter is pressed
         Do
@@ -1451,16 +1510,16 @@ Module Programming
 
                 Case ConsoleKey.UpArrow
                     'Checks if it can move selected person up
-                    If PersonSelect > 0 Then
+                    If SelectedPerson > 0 Then
                         'Moves selected person up
-                        PersonSelect = PersonSelect - 1
+                        SelectedPerson = SelectedPerson - 1
                     End If
 
                 Case ConsoleKey.DownArrow
                     'Checks if it can move selected option down
-                    If PersonSelect < ContactsListFileContents - 1 Then
+                    If SelectedPerson < ContactsListFileContents.Count - 1 Then
                         'Moves selected option down
-                        PersonSelect = PersonSelect + 1
+                        SelectedPerson = SelectedPerson + 1
                     End If
 
             End Select
@@ -1470,7 +1529,7 @@ Module Programming
         Loop Until PersonSelect.Key = ConsoleKey.Enter
 
         'Return the contents of the selected person
-        Return ContactsListFileContents(PersonSelect)
+        Return ContactsListFileContents(SelectedPerson)
     End Function
 End Module
 
