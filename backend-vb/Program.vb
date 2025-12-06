@@ -1125,7 +1125,7 @@ Module Programming
     'Stores everything from file + user changes
     Private ContactsListFileContents as New List(of ContactsListInformation)
 
-    Private ContactsListFilePath as String = "ContactsList.csv"
+    Private ContactsListFilePath as String = "storage/ContactsList.csv"
 
     'Mode 0 = Enter ID
     'Mode 2 = Read All
