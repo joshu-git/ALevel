@@ -1299,6 +1299,11 @@ Module Programming
             Case 1 
                 Result = ContactsListSelectPerson()
 
+                If Not Result.HasValue Then
+                    'If backspace is pressed then return
+                    Return
+                End If
+                
         End Select
 
         'Stores old contents to be updated
@@ -1373,8 +1378,11 @@ Module Programming
                     .DateOfBirth = NewDateOfBirth
                 }
 
+                'Displays append person information
+                Console.WriteLine("Append Person:" & VbCrLf)
+
                 'Allows user to view entered contents
-                Console.WriteLine($"Added: ID ~> {Old.ID}, Surname ~> {NewSurname}, Forename ~> {NewForename}, Postcode ~> {NewPostcode}, Date Of Birth ~> {NewDateOfBirth}")
+                Console.WriteLine($"Appended: ID ~> {Old.ID}, Surname ~> {NewSurname}, Forename ~> {NewForename}, Postcode ~> {NewPostcode}, Date Of Birth ~> {NewDateOfBirth}")
                 Console.Readline()
 
                 'Exits the for loop as matching ID was found
@@ -1422,6 +1430,11 @@ Module Programming
             Case 1
                 Result = ContactsListSelectPerson()
 
+                If Not Result.HasValue Then
+                    'If backspace is pressed then return
+                    Return
+                End If
+
         End Select
 
         Dim Person = Result.value
@@ -1430,7 +1443,7 @@ Module Programming
         Console.WriteLine("Delete Person:".PadRight(30, " ") & "Enter to confirm." & VbCrLf)
 
         'Confirms the user definitely wants to delete this contact
-        Console.WriteLine($"Are you sure you want to delete {Person.Forename} {Person.Surname}? (Y/N)")
+        Console.WriteLine($"Are you sure you want to delete {Person.Forename} {Person.Surname}? (Y/N)" & VbCrLf)
         Dim UserInput as String = Console.Readline()
 
         'Clear confirmation
@@ -1486,6 +1499,18 @@ Module Programming
 
     'Returns users selected person via interface
     Function ContactsListSelectPerson() as ContactsListInformation?
+
+        'Checks if there are any people in the list
+        If ContactsListFileContents.Count = 0 Then
+            'Displays select person information
+            Console.WriteLine("Select Person:" & VbCrLf)
+
+            'Inform the user and return after reading
+            Console.WriteLine("There are no people to select.")
+            Console.ReadLine()
+            Return Nothing
+        End If
+
         'Stores information from Console.ReadKey()
         Dim PersonSelect as ConsoleKeyInfo
 
