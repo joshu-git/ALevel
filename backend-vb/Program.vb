@@ -74,6 +74,24 @@ Module Menu
         'Geography section
         _MainMenu_Geography
 
+        'WaterAndCarbonCycles category
+        _MainMenu_Geography_WaterAndCarbonCycles
+
+        'CoastalSystemsAndLandscapes category
+        _MainMenu_Geography_CoastalSystemsAndLandscapes
+
+        'Hazards category
+        _MainMenu_Geography_Hazards
+
+        'GlobalSystemsAndGovernance category
+        _MainMenu_Geography_GlobalSystemsAndGovernance
+
+        'ChangingPlaces category
+        _MainMenu_Geography_ChangingPlaces
+
+        'PopulationAndTheEnvironment category
+        _MainMenu_Geography_PopulationAndTheEnvironment
+
         'Mathematics section
         _MainMenu_Mathematics
 
@@ -112,8 +130,13 @@ Module Menu
                                     {"Databases: ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
                                     {"Big Data:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
                                     {"Functional Programming:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                    {"Problem Solving:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-                                    {"Geography:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                    {"Problem Solving:", "Water & Carbon Cycles", "Coastal Systems & Landscapes", "Hazards", "Global Systems & Governance", " Changing Places", "Population & The Environment", " ", " ", " ", " ", " ", " ", " "},
+                                    {"Water & Carbon Cycles:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                    {"Coastal Systems & Landscapes:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                    {"Hazards:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                    {"Global Systems & Governance:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                    {"Changing Places:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
+                                    {"Population & The Environment:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
                                     {"Mathematics:", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "}}
 
 
@@ -709,6 +732,118 @@ Module Menu
                 Case MenuName._MainMenu_Geography
                     PreviousMenu = MenuName._MainMenu
 
+                    'Calls menu interface with ProblemSolving information
+                    MenuInterface(7)
+
+                    'Skips menus if backspace was pressed
+                    If Not BackspacePressed And Not EscapePressed Then
+                        'Decides which menu to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                SelectedMenu = MenuName._MainMenu_Geography_WaterAndCarbonCycles
+                            Case 1
+                                SelectedMenu = MenuName._MainMenu_Geography_CoastalSystemsAndLandscapes
+                            Case 2
+                                SelectedMenu = MenuName._MainMenu_Geography_Hazards
+                            Case 3
+                                SelectedMenu = MenuName._MainMenu_Geography_GlobalSystemsAndGovernance
+                            Case 4
+                                SelectedMenu = MenuName._MainMenu_Geography_ChangingPlaces
+                            Case 5
+                                SelectedMenu = MenuName._MainMenu_Geography_PopulationAndTheEnvironment
+                        End Select
+                    End If
+
+                Case MenuName._MainMenu_Geography_WaterAndCarbonCycles
+                    PreviousMenu = MenuName._MainMenu_Geography
+
+                    'Calls menu interface with WaterAndCarbonCycles information
+                    MenuInterface(1)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed And Not EscapePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call program here
+                        End Select
+                    End If
+
+                Case MenuName._MainMenu_Geography_CoastalSystemsAndLandscapes
+                    PreviousMenu = MenuName._MainMenu_Geography
+
+                    'Calls menu interface with CoastalSystemsAndLandscapes information
+                    MenuInterface(1)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed And Not EscapePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call program here
+                        End Select
+                    End If
+                
+                Case MenuName._MainMenu_Geography_Hazards
+                    PreviousMenu = MenuName._MainMenu_Geography
+
+                    'Calls menu interface with Hazards information
+                    MenuInterface(1)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed And Not EscapePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call program here
+                        End Select
+                    End If
+
+                Case MenuName._MainMenu_Geography_GlobalSystemsAndGovernance
+                    PreviousMenu = MenuName._MainMenu_Geography
+
+                    'Calls menu interface with GlobalSystemsAndGovernance information
+                    MenuInterface(1)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed And Not EscapePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call program here
+                        End Select
+                    End If
+
+                Case MenuName._MainMenu_Geography_ChangingPlaces
+                    PreviousMenu = MenuName._MainMenu_Geography
+
+                    'Calls menu interface with ChangingPlaces information
+                    MenuInterface(1)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed And Not EscapePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call program here
+                        End Select
+                    End If
+
+                Case MenuName._MainMenu_Geography_PopulationAndTheEnvironment
+                    PreviousMenu = MenuName._MainMenu_Geography
+
+                    'Calls menu interface with PopulationAndTheEnvironment information
+                    MenuInterface(1)
+
+                    'Skips programs if backspace was pressed
+                    If Not BackspacePressed And Not EscapePressed Then
+                        'Decides which program to call based on selected option
+                        Select Case SelectedOption
+                            Case 0
+                                'Call program here
+                        End Select
+                    End If
+
                 Case MenuName._MainMenu_Mathematics
                     PreviousMenu = MenuName._MainMenu
 
@@ -808,6 +943,9 @@ Module Menu
     End Sub
 End Module
 
+'ComputerScience section
+
+'Programming category
 Module Programming
     Sub Basics()
 
@@ -1558,14 +1696,17 @@ Module Programming
     End Function
 End Module
 
+'Algorithms category
 Module Algorithms
 
 End Module
 
+'Computation category
 Module Computation
 
 End Module
 
+'DataRepresentation category
 Module DataRepresentation
     Sub NumberSystems()
 
@@ -1596,6 +1737,7 @@ Module DataRepresentation
     End Sub
 End Module
 
+'ComputerSystems category
 Module ComputerSystems
     Sub HardwareAndSoftware()
 
@@ -1604,24 +1746,60 @@ Module ComputerSystems
     Sub RoleOfTheOS()
 
     End Sub
+
+    Sub LanguageClassification()
+
+    End Sub
 End Module
 
+'OrganizationAndArchitecture category
 Module OrganizationAndArchitecture
 
 End Module
 
+'Databases category
 Module Databases
 
 End Module
 
+'BigData category
 Module BigData
 
 End Module
 
+'FunctionalProgramming category
 Module FunctionalProgramming
 
 End Module
 
+'ProblemSolving category
 Module ProblemSolving
+
+End Module
+
+'Geography section
+
+'WaterAndCarbonCycles category
+Module WaterAndCarbonCycles
+
+End Module
+
+Module CoastalSystemsAndLandscapes
+
+End Module
+
+Module Hazards
+
+End Module
+
+Module GlobalSystemsAndGovernance
+
+End Module
+
+Module ChangingPlaces
+
+End Module
+
+Module PopulationAndTheEnvironment
 
 End Module
